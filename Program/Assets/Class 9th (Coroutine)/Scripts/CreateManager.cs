@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class CreateManager : MonoBehaviour
 {
-
-
-    [SerializeField] float activeTime = 5.0f;
-
     [SerializeField] float offset = 1.5f;
     [SerializeField] GameObject elemental;
 
-    [SerializeField] int count = 0;
-    [SerializeField] float time = 0.0f;
-
     [SerializeField] List<GameObject> list;
+    [SerializeField] WaitForSeconds waitForSeconds = new WaitForSeconds(5.0f);
+
+    [SerializeField] int count = 0;
 
     void Start()
     {
@@ -34,12 +30,11 @@ public class CreateManager : MonoBehaviour
 
     IEnumerator Coroutime()
     {
-        Debug.Log("Start Coroutine");
-
-        yield return new WaitForSeconds(5.0f);
-
-        Debug.Log("Stop Coroutine");
+        while (count < list.Count)
+        {
+            list[count++].SetActive(true);
+            
+            yield return waitForSeconds;
+        }
     }
-
-
 }
